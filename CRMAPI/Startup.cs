@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using CRMAPI.CRMMapper;
 
 namespace CRMAPI
 {
@@ -33,6 +35,7 @@ namespace CRMAPI
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddAutoMapper(typeof(CRMMappings));
             services.AddControllers();
         }
 
