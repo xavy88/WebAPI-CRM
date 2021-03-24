@@ -24,7 +24,7 @@ namespace CRMAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetDepartment()
+        public IActionResult GetDepartments()
         {
             var objList = _departmentRepo.GetDepartments();
             var objDto = new List<DepartmentDto>();
@@ -35,6 +35,20 @@ namespace CRMAPI.Controllers
             }
 
             return Ok(objDto);
+        }
+
+        [HttpGet("{departmentId:int}")]
+        public IActionResult GetDepartment(int departmentId)
+        {
+            var obj = _departmentRepo.GetDepartment(departmentId);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            var objDto = _mapper.Map<DepartmentDto>(obj);
+            return Ok(objDto);
+
         }
     }
 }
