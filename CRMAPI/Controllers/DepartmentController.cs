@@ -81,5 +81,24 @@ namespace CRMAPI.Controllers
 
             return CreatedAtRoute("GetDepartment", new { departmentId=departmentObj.Id},departmentObj);
         }
+        [HttpPatch("{departmentId:int}", Name = "UpdateDepartment")]
+        public IActionResult UpdateDepartment(int departmentId, [FromBody] DepartmentDto departmentDto)
+        {
+            if (departmentDto == null || departmentId !=departmentDto.Id )
+            {
+                return BadRequest(ModelState);
+            }
+            var departmentObj = _mapper.Map<Department>(departmentDto);
+           // departmentObj.IsActive = false;
+
+            if (!_departmentRepo.UpdateDepartment(departmentObj))
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating the record {departmentObj.Name}");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+
+        }
     }
 }
