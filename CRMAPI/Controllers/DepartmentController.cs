@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CRMAPI.Models.Dtos;
 using CRMAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,20 @@ namespace CRMAPI.Controllers
         {
             _departmentRepo = departmentrepo;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        public IActionResult GetDepartment()
+        {
+            var objList = _departmentRepo.GetDepartments();
+            var objDto = new List<DepartmentDto>();
+
+            foreach (var obj in objList)
+            {
+                objDto.Add(_mapper.Map<DepartmentDto>(obj));
+            }
+
+            return Ok(objDto);
         }
     }
 }
