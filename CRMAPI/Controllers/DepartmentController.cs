@@ -100,47 +100,46 @@ namespace CRMAPI.Controllers
 
         }
 
-        [HttpPatch("{departmentId:int}", Name = "InactiveDepartment")]
-        public IActionResult InactiveDepartment(int departmentId, [FromBody] DepartmentDto departmentDto)
-        {
-            if (departmentDto == null || departmentId != departmentDto.Id)
-            {
-                return BadRequest(ModelState);
-            }
-            var departmentObj = _mapper.Map<Department>(departmentDto);
-            departmentObj.IsActive = false;
+        //[HttpPatch("{departmentId:int}", Name = "InactiveDepartment")]
+        //public IActionResult InactiveDepartment(int departmentId, [FromBody] DepartmentDto departmentDto)
+        //{
+        //    if (departmentDto == null || departmentId != departmentDto.Id)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var departmentObj = _mapper.Map<Department>(departmentDto);
+        //    departmentObj.IsActive = false;
 
-            if (!_departmentRepo.InactiveDepartment(departmentObj))
-            {
-                ModelState.AddModelError("", $"Something went wrong when inactiving the record {departmentObj.Name}");
-                return StatusCode(500, ModelState);
-            }
+        //    if (!_departmentRepo.InactiveDepartment(departmentObj))
+        //    {
+        //        ModelState.AddModelError("", $"Something went wrong when inactiving the record {departmentObj.Name}");
+        //        return StatusCode(500, ModelState);
+        //    }
 
-            return NoContent();
+        //    return NoContent();
 
-        }
+        //}
 
 
-        [HttpPatch("{departmentId:int}", Name = "ActiveDepartment")]
-        public IActionResult ActiveDepartment(int departmentId, [FromBody] DepartmentDto departmentDto)
-        {
-            if (departmentDto == null || departmentId != departmentDto.Id)
-            {
-                return BadRequest(ModelState);
-            }
-            var departmentObj = _mapper.Map<Department>(departmentDto);
-            departmentObj.IsActive = true;
+        //[HttpPatch("{departmentId:int}", Name = "ActiveDepartment")]
+        //public IActionResult ActiveDepartment(int departmentId, [FromBody] DepartmentDto departmentDto)
+        //{
+        //    if (departmentDto == null || departmentId != departmentDto.Id)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var departmentObj = _mapper.Map<Department>(departmentDto);
+        //    departmentObj.IsActive = false;
 
-            if (!_departmentRepo.ActiveDepartment(departmentObj))
-            {
-                ModelState.AddModelError("", $"Something went wrong when activing the record {departmentObj.Name}");
-                return StatusCode(500, ModelState);
-            }
+        //    if (!_departmentRepo.ActiveDepartment(departmentObj))
+        //    {
+        //        ModelState.AddModelError("", $"Something went wrong when activing the record {departmentObj.Name}");
+        //        return StatusCode(500, ModelState);
+        //    }
 
-            return NoContent();
+        //    return NoContent();
 
-        }
-
+        //}
 
         [HttpDelete("{departmentId:int}", Name = "DeleteDepartment")]
         public IActionResult DeleteDepartment(int departmentId)
