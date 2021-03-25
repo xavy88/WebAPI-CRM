@@ -140,5 +140,26 @@ namespace CRMAPI.Controllers
             return NoContent();
 
         }
+
+
+        [HttpDelete("{departmentId:int}", Name = "DeleteDepartment")]
+        public IActionResult DeleteDepartment(int departmentId)
+        {
+            if (!_departmentRepo.DepartmentExists(departmentId))
+            {
+                return NotFound();
+            }
+            var departmentObj = _departmentRepo.GetDepartment(departmentId);
+
+            if (!_departmentRepo.DeleteDepartment(departmentObj))
+            {
+                ModelState.AddModelError("", $"Something went wrong when deleting the record {departmentObj.Name}");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+
+        }
+
     }
 }
