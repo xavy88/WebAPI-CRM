@@ -16,6 +16,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CRMAPI.CRMMapper;
+using System.Reflection;
+using System.IO;
 
 namespace CRMAPI
 {
@@ -44,6 +46,10 @@ namespace CRMAPI
                         Title = "CRM API",
                         Version = "1"
                     });
+                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+                options.IncludeXmlComments(cmlCommentsFullPath);
+
             });
             services.AddControllers();
         }

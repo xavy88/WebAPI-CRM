@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CRMAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CRMAPI.Controllers.DepartmentController.GetDepartments">
+            <summary>
+            Get a list of departments.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CRMAPI.Controllers.DepartmentController.GetDepartment(System.Int32)">
+            <summary>
+            Get individual department.
+            </summary>
+            <param name="departmentId">The Id of department</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

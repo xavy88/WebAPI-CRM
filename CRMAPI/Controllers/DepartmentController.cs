@@ -24,6 +24,10 @@ namespace CRMAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get a list of departments.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetDepartments()
         {
@@ -37,6 +41,12 @@ namespace CRMAPI.Controllers
 
             return Ok(objDto);
         }
+
+        /// <summary>
+        /// Get individual department.
+        /// </summary>
+        /// <param name="departmentId">The Id of department</param>
+        /// <returns></returns>
 
         [HttpGet("{departmentId:int}", Name ="GetDepartment")]
         public IActionResult GetDepartment(int departmentId)
