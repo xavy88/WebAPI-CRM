@@ -44,7 +44,19 @@ namespace CRMAPI
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "CRM API",
-                        Version = "1"
+                        Version = "1",
+                        Description="CRM Web Application",
+                        Contact=new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email="xavyurbina88@gmail.com",
+                            Name="Javier Urbina",
+                            Url=new Uri("https://www.linkedin.com/in/francisco-javier-urbina-blandon-82475492/")
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                        {
+                            Name="MIT License",
+                            Url= new Uri("https://en.wikipedia.org/wiki/MIT_License")
+                        }
                     });
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
