@@ -15,7 +15,7 @@ namespace CRMAPI.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private IDepartmentRepository _departmentRepo;
+        private readonly IDepartmentRepository _departmentRepo;
         private readonly IMapper _mapper;
 
         public DepartmentController(IDepartmentRepository departmentrepo, IMapper mapper)
