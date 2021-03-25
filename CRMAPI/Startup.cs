@@ -36,6 +36,15 @@ namespace CRMAPI
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddAutoMapper(typeof(CRMMappings));
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("CRMOpenAPISpec",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "CRM API",
+                        Version = "1"
+                    });
+            });
             services.AddControllers();
         }
 
@@ -48,7 +57,7 @@ namespace CRMAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSwagger();
             app.UseRouting();
 
             app.UseAuthorization();
