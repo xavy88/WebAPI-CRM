@@ -13,6 +13,7 @@ namespace CRMAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentRepository _departmentRepo;
@@ -29,6 +30,7 @@ namespace CRMAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(200, Type=typeof(List<DepartmentDto>))]
         public IActionResult GetDepartments()
         {
             var objList = _departmentRepo.GetDepartments();
@@ -49,6 +51,9 @@ namespace CRMAPI.Controllers
         /// <returns></returns>
 
         [HttpGet("{departmentId:int}", Name ="GetDepartment")]
+        [ProducesResponseType(200, Type = typeof(DepartmentDto))]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
         public IActionResult GetDepartment(int departmentId)
         {
             var obj = _departmentRepo.GetDepartment(departmentId);
@@ -63,6 +68,9 @@ namespace CRMAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(DepartmentDto))]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateDepartment([FromBody] DepartmentDto departmentDto)
         {
             if (departmentDto == null)
@@ -92,6 +100,9 @@ namespace CRMAPI.Controllers
             return CreatedAtRoute("GetDepartment", new { departmentId=departmentObj.Id},departmentObj);
         }
         [HttpPatch("{departmentId:int}", Name = "UpdateDepartment")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateDepartment(int departmentId, [FromBody] DepartmentDto departmentDto)
         {
             if (departmentDto == null || departmentId !=departmentDto.Id )
@@ -152,6 +163,10 @@ namespace CRMAPI.Controllers
         //}
 
         [HttpDelete("{departmentId:int}", Name = "DeleteDepartment")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteDepartment(int departmentId)
         {
             if (!_departmentRepo.DepartmentExists(departmentId))
