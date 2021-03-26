@@ -14,5 +14,6 @@ namespace CRMAPI.Data
 
         }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Position> Positions { get; set; }
     }
 }
