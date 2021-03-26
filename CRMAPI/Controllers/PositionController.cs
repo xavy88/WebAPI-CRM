@@ -71,7 +71,7 @@ namespace CRMAPI.Controllers
         [ProducesResponseType(201, Type = typeof(PositionDto))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreatePosition([FromBody] PositionDto positionDto)
+        public IActionResult CreatePosition([FromBody] PositionUpsertDto positionDto)
         {
             if (positionDto == null)
             {
@@ -83,11 +83,6 @@ namespace CRMAPI.Controllers
                 ModelState.AddModelError("", "Position already exists!");
                 return StatusCode(404, ModelState);
             }
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
 
             var positionObj = _mapper.Map<Position>(positionDto);
 
@@ -103,7 +98,7 @@ namespace CRMAPI.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdatePosition(int positionId, [FromBody] PositionDto positionDto)
+        public IActionResult UpdatePosition(int positionId, [FromBody] PositionUpsertDto positionDto)
         {
             if (positionDto == null || positionId !=positionDto.Id )
             {
@@ -120,47 +115,6 @@ namespace CRMAPI.Controllers
             return NoContent();
 
         }
-
-        //[HttpPatch("{positionId:int}", Name = "InactivePosition")]
-        //public IActionResult InactivePosition(int positionId, [FromBody] PositionDto positionDto)
-        //{
-        //    if (positionDto == null || positionId != positionDto.Id)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var positionObj = _mapper.Map<Position>(positionDto);
-        //    positionObj.IsActive = false;
-
-        //    if (!_positionRepo.InactivePosition(positionObj))
-        //    {
-        //        ModelState.AddModelError("", $"Something went wrong when inactiving the record {positionObj.Name}");
-        //        return StatusCode(500, ModelState);
-        //    }
-
-        //    return NoContent();
-
-        //}
-
-
-        //[HttpPatch("{positionId:int}", Name = "ActivePosition")]
-        //public IActionResult ActivePosition(int positionId, [FromBody] PositionDto positionDto)
-        //{
-        //    if (positionDto == null || positionId != positionDto.Id)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var positionObj = _mapper.Map<Position>(positionDto);
-        //    positionObj.IsActive = false;
-
-        //    if (!_positionRepo.ActivePosition(positionObj))
-        //    {
-        //        ModelState.AddModelError("", $"Something went wrong when activing the record {positionObj.Name}");
-        //        return StatusCode(500, ModelState);
-        //    }
-
-        //    return NoContent();
-
-        //}
 
         [HttpDelete("{positionId:int}", Name = "DeletePosition")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

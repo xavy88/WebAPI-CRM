@@ -13,6 +13,8 @@ namespace CRMAPI.CRMMapper
         public CRMMappings()
         {
             CreateMap<Department, DepartmentDto>().ReverseMap();
+            CreateMap<Position, PositionDto>().ReverseMap();
+            CreateMap<Position, PositionDto>().ReverseMap();
         }
     }
 }
