@@ -37,6 +37,7 @@ namespace CRMAPI
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IPositionRepository, PositionRepository>();
             services.AddAutoMapper(typeof(CRMMappings));
             services.AddSwaggerGen(options =>
             {
