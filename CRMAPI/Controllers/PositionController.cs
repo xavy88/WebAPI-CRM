@@ -69,6 +69,30 @@ namespace CRMAPI.Controllers
 
         }
 
+        [HttpGet("[action]{departmentId:int}")]
+        [ProducesResponseType(200, Type = typeof(PositionDto))]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public IActionResult GetPositionInDepartment(int departmentId)
+        {
+            var objList = _positionRepo.GetPositionsInDepartment(departmentId);
+            if (objList == null)
+            {
+                return NotFound();
+            }
+
+            var objDto = new List<PositionDto>();
+            foreach (var obj in objList)
+            {
+                objDto.Add(_mapper.Map<PositionDto>(obj));
+            }
+
+           
+            return Ok(objDto);
+
+        }
+
+
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(PositionDto))]
         [ProducesResponseType(StatusCodes.Status201Created)]

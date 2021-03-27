@@ -4,7 +4,9 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CRMAPI
@@ -27,6 +29,10 @@ namespace CRMAPI
                         Version = desc.ApiVersion.ToString()
                     });
             }
+
+            var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+            options.IncludeXmlComments(cmlCommentsFullPath);
 
         }
     }
