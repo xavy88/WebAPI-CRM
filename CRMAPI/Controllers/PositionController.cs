@@ -71,7 +71,7 @@ namespace CRMAPI.Controllers
         [ProducesResponseType(201, Type = typeof(PositionDto))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreatePosition([FromBody] PositionUpsertDto positionDto)
+        public IActionResult CreatePosition([FromBody] PositionCreateDto positionDto)
         {
             if (positionDto == null)
             {
@@ -98,7 +98,7 @@ namespace CRMAPI.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdatePosition(int positionId, [FromBody] PositionUpsertDto positionDto)
+        public IActionResult UpdatePosition(int positionId, [FromBody] PositionUpdateDto positionDto)
         {
             if (positionDto == null || positionId !=positionDto.Id )
             {
