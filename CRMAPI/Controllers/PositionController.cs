@@ -13,6 +13,7 @@ namespace CRMAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "CRMOpenAPISpecPositions")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class PositionController : ControllerBase
     {

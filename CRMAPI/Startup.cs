@@ -41,12 +41,12 @@ namespace CRMAPI
             services.AddAutoMapper(typeof(CRMMappings));
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("CRMOpenAPISpec",
+                options.SwaggerDoc("CRMOpenAPISpecDepartments",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
-                        Title = "CRM API",
+                        Title = "CRM API - Departments",
                         Version = "1",
-                        Description="CRM Web Application",
+                        Description="CRM Web Application - Departments",
                         Contact=new Microsoft.OpenApi.Models.OpenApiContact()
                         {
                             Email="xavyurbina88@gmail.com",
@@ -59,6 +59,26 @@ namespace CRMAPI
                             Url= new Uri("https://en.wikipedia.org/wiki/MIT_License")
                         }
                     });
+
+                options.SwaggerDoc("CRMOpenAPISpecPositions",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "CRM API - Positions",
+                        Version = "1",
+                        Description = "CRM Web Application - Positions",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email = "xavyurbina88@gmail.com",
+                            Name = "Javier Urbina",
+                            Url = new Uri("https://www.linkedin.com/in/francisco-javier-urbina-blandon-82475492/")
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                        {
+                            Name = "MIT License",
+                            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+                        }
+                    });
+
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
                 options.IncludeXmlComments(cmlCommentsFullPath);
@@ -79,7 +99,8 @@ namespace CRMAPI
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/CRMOpenAPISpec/swagger.json", "CRM API");
+                options.SwaggerEndpoint("/swagger/CRMOpenAPISpecDepartments/swagger.json", "CRM API - Departments");
+                options.SwaggerEndpoint("/swagger/CRMOpenAPISpecPositions/swagger.json", "CRM API - Positions");
                 options.RoutePrefix = "";
             });
             app.UseRouting();
