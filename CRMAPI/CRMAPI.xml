@@ -17,6 +17,12 @@
             <param name="departmentId">The Id of department</param>
             <returns></returns>
         </member>
+        <member name="M:CRMAPI.Controllers.DepartmentV2Controller.GetDepartments">
+            <summary>
+            Get a list of departments.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CRMAPI.Controllers.PositionController.GetPositions">
             <summary>
             Get a list of positions.

@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace CRMAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/positions")]
+    //[Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = "CRMOpenAPISpecPositions")]
+    //[ApiExplorerSettings(GroupName = "CRMOpenAPISpecPositions")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class PositionController : ControllerBase
     {

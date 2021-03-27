@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace CRMAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/departments")]
+    //[Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = "CRMOpenAPISpecDepartments")]
+    //[ApiExplorerSettings(GroupName = "CRMOpenAPISpecDepartments")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class DepartmentController : ControllerBase
     {

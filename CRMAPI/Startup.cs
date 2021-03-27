@@ -18,6 +18,9 @@ using AutoMapper;
 using CRMAPI.CRMMapper;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.Extensions.Options;
 
 namespace CRMAPI
 {
@@ -39,56 +42,65 @@ namespace CRMAPI
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IPositionRepository, PositionRepository>();
             services.AddAutoMapper(typeof(CRMMappings));
-            services.AddSwaggerGen(options =>
+            services.AddApiVersioning(options =>
             {
-                options.SwaggerDoc("CRMOpenAPISpecDepartments",
-                    new Microsoft.OpenApi.Models.OpenApiInfo()
-                    {
-                        Title = "CRM API - Departments",
-                        Version = "1",
-                        Description="CRM Web Application - Departments",
-                        Contact=new Microsoft.OpenApi.Models.OpenApiContact()
-                        {
-                            Email="xavyurbina88@gmail.com",
-                            Name="Javier Urbina",
-                            Url=new Uri("https://www.linkedin.com/in/francisco-javier-urbina-blandon-82475492/")
-                        },
-                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
-                        {
-                            Name="MIT License",
-                            Url= new Uri("https://en.wikipedia.org/wiki/MIT_License")
-                        }
-                    });
-
-                options.SwaggerDoc("CRMOpenAPISpecPositions",
-                    new Microsoft.OpenApi.Models.OpenApiInfo()
-                    {
-                        Title = "CRM API - Positions",
-                        Version = "1",
-                        Description = "CRM Web Application - Positions",
-                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
-                        {
-                            Email = "xavyurbina88@gmail.com",
-                            Name = "Javier Urbina",
-                            Url = new Uri("https://www.linkedin.com/in/francisco-javier-urbina-blandon-82475492/")
-                        },
-                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
-                        {
-                            Name = "MIT License",
-                            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
-                        }
-                    });
-
-                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
-                options.IncludeXmlComments(cmlCommentsFullPath);
-
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1,0);
+                options.ReportApiVersions = true;
             });
+            services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen();
+            //services.AddSwaggerGen(options =>
+            //{
+            //    options.SwaggerDoc("CRMOpenAPISpec",
+            //        new Microsoft.OpenApi.Models.OpenApiInfo()
+            //        {
+            //            Title = "CRM API",
+            //            Version = "1",
+            //            Description="CRM Web Application",
+            //            Contact=new Microsoft.OpenApi.Models.OpenApiContact()
+            //            {
+            //                Email="xavyurbina88@gmail.com",
+            //                Name="Javier Urbina",
+            //                Url=new Uri("https://www.linkedin.com/in/francisco-javier-urbina-blandon-82475492/")
+            //            },
+            //            License = new Microsoft.OpenApi.Models.OpenApiLicense()
+            //            {
+            //                Name="MIT License",
+            //                Url= new Uri("https://en.wikipedia.org/wiki/MIT_License")
+            //            }
+            //        });
+
+            //    //options.SwaggerDoc("CRMOpenAPISpecPositions",
+            //    //    new Microsoft.OpenApi.Models.OpenApiInfo()
+            //    //    {
+            //    //        Title = "CRM API - Positions",
+            //    //        Version = "1",
+            //    //        Description = "CRM Web Application - Positions",
+            //    //        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+            //    //        {
+            //    //            Email = "xavyurbina88@gmail.com",
+            //    //            Name = "Javier Urbina",
+            //    //            Url = new Uri("https://www.linkedin.com/in/francisco-javier-urbina-blandon-82475492/")
+            //    //        },
+            //    //        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+            //    //        {
+            //    //            Name = "MIT License",
+            //    //            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+            //    //        }
+            //    //    });
+
+            //    var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //    var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+            //    options.IncludeXmlComments(cmlCommentsFullPath);
+
+            //});
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -97,12 +109,24 @@ namespace CRMAPI
 
             app.UseHttpsRedirection();
             app.UseSwagger();
+
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/CRMOpenAPISpecDepartments/swagger.json", "CRM API - Departments");
-                options.SwaggerEndpoint("/swagger/CRMOpenAPISpecPositions/swagger.json", "CRM API - Positions");
-                options.RoutePrefix = "";
+                foreach (var desc in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json",
+                        desc.GroupName.ToUpperInvariant());
+
+                    options.RoutePrefix = "";
+                }
             });
+
+            //app.UseSwaggerUI(options =>
+            //{
+            //    options.SwaggerEndpoint("/swagger/CRMOpenAPISpec/swagger.json", "CRM API");
+            //    //options.SwaggerEndpoint("/swagger/CRMOpenAPISpecPositions/swagger.json", "CRM API - Positions");
+            //    options.RoutePrefix = "";
+            //});
             app.UseRouting();
 
             app.UseAuthorization();
