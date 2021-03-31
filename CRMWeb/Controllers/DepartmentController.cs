@@ -40,6 +40,28 @@ namespace CRMWeb.Controllers
             return View(obj);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(Department obj)
+        {
+            if (ModelState.IsValid)
+            {
+                  
+                if (obj.Id == 0)
+                {
+                    await _departmentRepository.CreateAsync(SD.DepartmentAPIPath, obj);
+                }
+                else
+                {
+                    await _departmentRepository.UpdateAsync(SD.DepartmentAPIPath+obj.Id, obj);
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(obj);
+            }
+        }
 
         public async Task<IActionResult> GetAllDepartment()
         {
