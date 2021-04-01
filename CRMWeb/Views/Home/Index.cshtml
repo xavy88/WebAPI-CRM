@@ -1,8 +1,88 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model CRMWeb.Models.ViewModel.IndexVM
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<div class="container">
+    <div class="row pb-4 backgroundWhite">
+        @foreach (var department in Model.DepartmentList)
+        {
+            <div class="container backgroundWhite pb-4">
+                <div class="card border">
+                    <div class="card-header bg-dark text-light ml-0 row container">
+                        <div class="col-12 col-md-6">
+                            <h1 class="text-warning">@department.Name</h1>
+                        </div>
+                        <div class="col-12 col-md-6 text-md-right">
+                            <h1 class="text-warning">
+                                State :@if (department.IsActive)
+                                {
+                                    <i class="fas fa-times"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-check-circle"></i>
+                                }
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container rounded p-2">
+                            <div class="row">
+                                <div class="col-12 col-lg-8">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 style="color:#bbb9b9">description: @department.Description </h3>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.PositionList.Where(u => u.DepartmentId == department.Id).Count() > 0)
+                                            {
+
+                                                <table class="table table-striped" style="border:1px solid #808080 ">
+                                                    <tr class="table-secondary">
+                                                        <th>
+                                                            Position
+                                                        </th>
+                                                        <th>Description</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                    @foreach (var position in Model.PositionList.Where(u => u.DepartmentId == department.Id))
+                                                    {
+                                                <tr>
+                                                    <td>@position.Name</td>
+                                                    <td>@position.Description</td>
+
+                                                    @if (position.IsActive)
+                                                    {
+                                                <td>
+                                                    <i class="fas fa-times"></i>
+                                                  
+                                                </td>
+                                                 }
+                                                  else
+                                                 {
+                                                <td>
+                                                    <i class="far fa-check-circle"></i>
+                                                </td>
+                                                        }
+                                                    </tr>
+                                                    }
+
+                                                    </table>
+                                                }
+                                                else
+                                                {
+                                                <p>No positions to show</p>
+                                                }
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="col-12 col-lg-4 text-center">
+                            <img src="https://via.placeholder.com/150" class="card-img-top p-2 rounded" width="100%" />
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         }
+    </div>
+ </div>
