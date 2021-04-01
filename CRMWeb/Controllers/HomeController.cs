@@ -1,4 +1,6 @@
 ﻿using CRMWeb.Models;
+using CRMWeb.Models.ViewModel;
+using CRMWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +14,25 @@ namespace CRMWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IDepartmentRepository _dptRepo;
+        private readonly IPositionRepository _positionRepo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IDepartmentRepository dptRepo, IPositionRepository positionRepo)
         {
             _logger = logger;
+            _dptRepo = dptRepo;
+            _positionRepo = positionRepo;
+
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexVM listOfDepartmentAndPosition = new IndexVM()
+            {
+                DepartmentList = await _dptRepo.GetAllAsync(SD.DepartmentAPIPath),
+                PositionList = await _positionRepo.GetAllAsync (SD.PositionAPIPath),
+            };
+            return View(listOfDepartmentAndPosition);
         }
 
         public IActionResult Privacy()
