@@ -35,7 +35,8 @@ namespace CRMWeb.Controllers
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
-                })
+                }),
+                Position = new Position()
             };
 
             if (id == null)
@@ -73,7 +74,19 @@ namespace CRMWeb.Controllers
             }
             else
             {
-                return View(obj);
+                IEnumerable<Department> dptList = await _departmentRepository.GetAllAsync(SD.DepartmentAPIPath);
+                PositionVM objVM = new PositionVM()
+                {
+
+                    DepartmentList = dptList.Select(i => new SelectListItem
+                    {
+                        Text = i.Name,
+                        Value = i.Id.ToString()
+                    }),
+                    Position = obj.Position
+                };
+
+                return View(objVM);
             }
         }
 
