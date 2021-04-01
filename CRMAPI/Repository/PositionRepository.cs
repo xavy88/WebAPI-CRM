@@ -54,7 +54,7 @@ namespace CRMAPI.Repository
 
         public ICollection<Position> GetPositions()
         {
-            return _db.Positions.OrderBy(a => a.Name).ToList();
+            return _db.Positions.Include(c => c.Department).OrderBy(a => a.Name).ToList();
         }
 
         public bool InactivePosition(Position position)
