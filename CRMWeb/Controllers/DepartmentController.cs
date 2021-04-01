@@ -67,5 +67,15 @@ namespace CRMWeb.Controllers
         {
             return Json(new { data = await _departmentRepository.GetAllAsync(SD.DepartmentAPIPath) });
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var status = await _departmentRepository.DeleteAsync(SD.DepartmentAPIPath, id);
+            if (status)
+            {
+                return Json(new { success = true,message="Delete Successful"});
+            }
+            return Json(new { success = false, message = "Delete Not Successful" });
+        }
     }
 }
