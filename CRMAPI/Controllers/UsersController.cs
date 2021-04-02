@@ -23,9 +23,9 @@ namespace CRMAPI.Controllers
         }
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User model)
+        public IActionResult Authenticate([FromBody] AuthenticationModel model)
         {
-            var user = _userRepo.Authenticate(model.UserName, model.Password);
+            var user = _userRepo.Authenticate(model.Username, model.Password);
             if (user == null)
             {
                 return BadRequest(new { message = "Username or password is incorrect" });
