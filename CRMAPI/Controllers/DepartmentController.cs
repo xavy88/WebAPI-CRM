@@ -2,6 +2,7 @@
 using CRMAPI.Models;
 using CRMAPI.Models.Dtos;
 using CRMAPI.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -55,6 +56,7 @@ namespace CRMAPI.Controllers
         [HttpGet("{departmentId:int}", Name ="GetDepartment")]
         [ProducesResponseType(200, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
+        [Authorize]
         [ProducesDefaultResponseType]
         public IActionResult GetDepartment(int departmentId)
         {
