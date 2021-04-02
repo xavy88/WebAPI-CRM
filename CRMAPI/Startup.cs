@@ -52,6 +52,9 @@ namespace CRMAPI
             services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
+
+            var appSettings = Configuration.GetSection("AppSetting");
+            services.Configure<AppSettings>(appSettings);
             //services.AddSwaggerGen(options =>
             //{
             //    options.SwaggerDoc("CRMOpenAPISpec",
