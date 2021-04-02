@@ -41,7 +41,8 @@ namespace CRMAPI.Repository
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                     new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials
@@ -73,6 +74,7 @@ namespace CRMAPI.Repository
             {
                 UserName = username,
                 Password = password,
+                Role="Admin",
                 DepartmentId = departmentId
             };
 

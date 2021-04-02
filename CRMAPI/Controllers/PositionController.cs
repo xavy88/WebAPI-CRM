@@ -2,6 +2,7 @@
 using CRMAPI.Models;
 using CRMAPI.Models.Dtos;
 using CRMAPI.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -56,6 +57,7 @@ namespace CRMAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PositionDto))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
+        [Authorize(Roles ="Admin")]
         public IActionResult GetPosition(int positionId)
         {
             var obj = _positionRepo.GetPosition(positionId);
