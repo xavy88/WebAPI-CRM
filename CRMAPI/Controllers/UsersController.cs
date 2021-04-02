@@ -33,5 +33,24 @@ namespace CRMAPI.Controllers
 
             return Ok(user);
         }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] User model)
+        {
+            bool ifUserNameUnique = _userRepo.IsUniqueUser(model.UserName);
+            if (!ifUserNameUnique)
+            {
+                return BadRequest(new { message = "User Name already exists" });
+            }
+            var user = _userRepo.Register(model.UserName, model.Password, model.DepartmentId);
+
+            if (user == null)
+            {
+                return BadRequest(new { message = "Error while registering" });
+            }
+
+            return Ok();
+        }
     }
 }

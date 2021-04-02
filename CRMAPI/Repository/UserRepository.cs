@@ -57,12 +57,30 @@ namespace CRMAPI.Repository
 
         public bool IsUniqueUser(string username)
         {
-            throw new NotImplementedException();
+            var user = _db.Users.SingleOrDefault(x => x.UserName == username);
+
+            // User not found
+            if (user == null)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public User Register(string username, string password)
+        public User Register(string username, string password, int departmentId)
         {
-            throw new NotImplementedException();
+            User userObj = new User()
+            {
+                UserName = username,
+                Password = password,
+                DepartmentId = departmentId
+            };
+
+            _db.Users.Add(userObj);
+            _db.SaveChanges();
+            userObj.Password = "";
+            return userObj;
+          
         }
     }
 }
