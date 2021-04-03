@@ -1,6 +1,7 @@
 ﻿using CRMWeb.Models;
 using CRMWeb.Models.ViewModel;
 using CRMWeb.Repository.IRepository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,13 +16,15 @@ namespace CRMWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IDepartmentRepository _dptRepo;
+        private readonly IAccountRepository _accRepo;
         private readonly IPositionRepository _positionRepo;
 
-        public HomeController(ILogger<HomeController> logger, IDepartmentRepository dptRepo, IPositionRepository positionRepo)
+        public HomeController(ILogger<HomeController> logger, IDepartmentRepository dptRepo, IPositionRepository positionRepo, IAccountRepository accRepo)
         {
             _logger = logger;
             _dptRepo = dptRepo;
             _positionRepo = positionRepo;
+            _accRepo = accRepo;
 
         }
 
@@ -45,5 +48,25 @@ namespace CRMWeb.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [HttpGet]
+        public IActionResult Login()
+        {
+            User obj = new User();
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(User obj)
+        {
+            User objUser = await _accRepo.LoginAsync(SD.AccountAPIPath+"authenticate/", obj);
+            if (objUser== null)
+            {
+                return View();
+            }
+
+            HttpContext.Session.SetString("JWToken", objUser.Token);
+            return RedirectToAction("~/Home/Index");
+        }
+
     }
 }
