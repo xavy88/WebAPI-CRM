@@ -2,6 +2,7 @@ using CRMWeb.Repository;
 using CRMWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,8 @@ namespace CRMWeb
         {
             services.AddScoped<IDepartmentRepository,DepartmentRepository>();
             services.AddScoped<IPositionRepository, PositionRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddHttpClient();
             services.AddSession(options =>
@@ -63,6 +66,7 @@ namespace CRMWeb
             .AllowAnyMethod()
             .AllowAnyHeader()
              );
+            app.UseSession();
             app.UseAuthorization();
             app.UseAuthentication();
             app.UseEndpoints(endpoints =>

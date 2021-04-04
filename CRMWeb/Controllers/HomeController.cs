@@ -32,8 +32,8 @@ namespace CRMWeb.Controllers
         {
             IndexVM listOfDepartmentAndPosition = new IndexVM()
             {
-                DepartmentList = await _dptRepo.GetAllAsync(SD.DepartmentAPIPath),
-                PositionList = await _positionRepo.GetAllAsync (SD.PositionAPIPath),
+                DepartmentList = await _dptRepo.GetAllAsync(SD.DepartmentAPIPath, HttpContext.Session.GetString("JWToken")),
+                PositionList = await _positionRepo.GetAllAsync (SD.PositionAPIPath, HttpContext.Session.GetString("JWToken")),
             };
             return View(listOfDepartmentAndPosition);
         }
@@ -65,7 +65,7 @@ namespace CRMWeb.Controllers
             }
 
             HttpContext.Session.SetString("JWToken", objUser.Token);
-            return RedirectToAction("~/Home/Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -83,13 +83,13 @@ namespace CRMWeb.Controllers
                 return View();
             }
 
-           return RedirectToAction("~/Home/Login");
+           return RedirectToAction("/Login");
         }
 
-        public async Task<IActionResult> LogoutAsync()
+        public IActionResult Logout()
         {
             HttpContext.Session.SetString("JWToken", "");
-           return RedirectToAction("~/Home/Index");
+           return RedirectToAction("Index");
         }
 
     }
