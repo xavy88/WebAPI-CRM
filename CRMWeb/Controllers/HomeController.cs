@@ -73,6 +73,7 @@ namespace CRMWeb.Controllers
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             HttpContext.Session.SetString("JWToken", objUser.Token);
+            TempData["alert"] = "Welcome " + objUser.UserName;
             return RedirectToAction("Index");
         }
 
@@ -90,8 +91,8 @@ namespace CRMWeb.Controllers
             {
                 return View();
             }
-
-           return RedirectToAction("/Login");
+            TempData["alert"] = "Registration Successful";
+            return RedirectToAction("Login");
         }
 
         public async Task<IActionResult> Logout()
