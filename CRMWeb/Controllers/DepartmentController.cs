@@ -1,5 +1,6 @@
 ﻿using CRMWeb.Models;
 using CRMWeb.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CRMWeb.Controllers
 {
+    //[Authorize]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _departmentRepository;
@@ -21,7 +23,7 @@ namespace CRMWeb.Controllers
         {
             return View(new Department() { });
         }
-
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Upsert(int? id)
         {
             Department obj = new Department();
