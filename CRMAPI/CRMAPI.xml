@@ -23,6 +23,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CRMAPI.Controllers.EmployeeController.GetEmployees">
+            <summary>
+            Get a list of positions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CRMAPI.Controllers.EmployeeController.GetEmployee(System.Int32)">
+            <summary>
+            Get individual position.
+            </summary>
+            <param name="employeeId">The Id of position</param>
+            <returns></returns>
+        </member>
         <member name="M:CRMAPI.Controllers.PositionController.GetPositions">
             <summary>
             Get a list of positions.

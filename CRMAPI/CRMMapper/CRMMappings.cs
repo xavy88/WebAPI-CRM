@@ -16,6 +16,9 @@ namespace CRMAPI.CRMMapper
             CreateMap<Position, PositionDto>().ReverseMap();
             CreateMap<Position, PositionUpdateDto>().ReverseMap();
             CreateMap<Position, PositionCreateDto>().ReverseMap();
+            CreateMap<Employee, EmployeeDto>().ReverseMap();
+            CreateMap<Employee, EmployeeUpdateDto>().ReverseMap();
+            CreateMap<Employee, EmployeeCreateDto>().ReverseMap();
         }
     }
 }
