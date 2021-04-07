@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,12 +20,10 @@ namespace CRMAPI.Models.Dtos
         public byte[] Image { get; set; }
         [Display(Name = "Position")]
         public int PositionId { get; set; }
-        [ForeignKey("PositionId")]
-        public virtual Position Position { get; set; }
+        public virtual PositionDto Position { get; set; }
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
-        [ForeignKey("DepartmentId")]
-        public virtual Department Department { get; set; }
+        public virtual DepartmentDto Department { get; set; }
         public bool IsActive { get; set; }
     }
 }
