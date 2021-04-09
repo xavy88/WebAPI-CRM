@@ -4,6 +4,19 @@
         <name>CRMAPI</name>
     </assembly>
     <members>
+        <member name="M:CRMAPI.Controllers.AccountController.GetAccounts">
+            <summary>
+            Get a list of departments.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CRMAPI.Controllers.AccountController.GetAccount(System.Int32)">
+            <summary>
+            Get individual department.
+            </summary>
+            <param name="accountId">The Id of department</param>
+            <returns></returns>
+        </member>
         <member name="M:CRMAPI.Controllers.DepartmentController.GetDepartments">
             <summary>
             Get a list of departments.
