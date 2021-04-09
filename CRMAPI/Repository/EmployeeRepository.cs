@@ -54,7 +54,7 @@ namespace CRMAPI.Repository
 
         public ICollection<Employee> GetEmployees()
         {
-            return _db.Employees.Include(c => c.Department).OrderBy(a => a.Name).ToList();
+            return _db.Employees.Include(c => c.Department).Include(p=>p.Position).OrderBy(a => a.Name).ToList();
         }
 
         public bool InactiveEmployee(Employee employee)

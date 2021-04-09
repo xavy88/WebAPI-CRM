@@ -40,6 +40,7 @@ namespace CRMWeb
             services.AddScoped<IDepartmentRepository,DepartmentRepository>();
             services.AddScoped<IPositionRepository, PositionRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddHttpClient();

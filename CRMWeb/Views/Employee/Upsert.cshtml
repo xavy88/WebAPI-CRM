@@ -1,0 +1,126 @@
+﻿@model CRMWeb.Models.ViewModel.EmployeeVM
+@{
+    var title = "Create Employee";
+}
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Employee.Id != 0)
+        {
+            <input type="hidden" asp-for="Employee.Id">
+            title = "Edit Employee";
+        }
+
+        <div class="col-12 p-3">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Employee.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Employee.Name" class="form-control" />
+                    <span asp-validation-for="Employee.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Employee.Email"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Employee.Email" class="form-control" />
+                    <span asp-validation-for="Employee.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Employee.Phone"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Employee.Phone" class="form-control" />
+                    <span asp-validation-for="Employee.Phone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Employee.HiredDate"></label>
+                </div>
+                <div class="col-8">
+                    @{
+                        var hireDate = "";
+                        if (Model.Employee.Id != 0)
+                        {
+                            hireDate = Model.Employee.HiredDate.ToShortDateString();
+                        }
+                    }
+                    <input id="datepicker" value="@hireDate" type="text" asp-for="@Model.Employee.HiredDate" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Employee.Image"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" asp-for="Employee.Image" id="projectImage" name="files" multiple class="form-control" />
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Department</label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Employee.DepartmentId,
+                   Model.DepartmentList, "-Please select a Department-", new { @class = "form-control" })
+                    <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Position</label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Employee.PositionId,
+                   Model.PositionList, "-Please select a Position-", new { @class = "form-control" })
+                    <span asp-validation-for="Employee.PositionId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 offset-4">
+                    <button type="submit" class="btn btn-primary form-control">
+                        @(Model.Employee.Id!=0?"Update":"Create")
+                    </button>
+                </div>
+                <div class="col-4">
+                    <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 text-right" style="width:250px;">
+            @if (Model.Employee.Image != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Employee.Image);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                <img src="@imgsrc" width="100%" />
+            }
+        </div>
+    </div>
+
+</form>
+
+@section scripts{
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1500:2020"
+            });
+        })
+    </script>
+}
+
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
