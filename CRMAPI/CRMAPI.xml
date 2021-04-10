@@ -6,7 +6,7 @@
     <members>
         <member name="M:CRMAPI.Controllers.AccountController.GetAccounts">
             <summary>
-            Get a list of departments.
+            Get a list of Account.
             </summary>
             <returns></returns>
         </member>
@@ -14,7 +14,7 @@
             <summary>
             Get individual department.
             </summary>
-            <param name="accountId">The Id of department</param>
+            <param name="accountId">The Id of account</param>
             <returns></returns>
         </member>
         <member name="M:CRMAPI.Controllers.DepartmentController.GetDepartments">
