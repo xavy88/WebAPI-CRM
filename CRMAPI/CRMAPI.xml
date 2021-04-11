@@ -17,6 +17,19 @@
             <param name="accountId">The Id of account</param>
             <returns></returns>
         </member>
+        <member name="M:CRMAPI.Controllers.ContactController.GetContacts">
+            <summary>
+            Get a list of positions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CRMAPI.Controllers.ContactController.GetContact(System.Int32)">
+            <summary>
+            Get individual position.
+            </summary>
+            <param name="contactId">The Id of Contact</param>
+            <returns></returns>
+        </member>
         <member name="M:CRMAPI.Controllers.DepartmentController.GetDepartments">
             <summary>
             Get a list of departments.
