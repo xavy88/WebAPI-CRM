@@ -18,9 +18,7 @@ namespace CRMAPI.Models.Dtos
         [StringLength(30)]
         public string Phone { get; set; }
         [StringLength(100)]
-        public int PositionId { get; set; }
-        [ForeignKey("PositionId")]
-        public virtual Position Position { get; set; }
+        public string Position { get; set; }
         [Display(Name = "Account")]
         public int AccountId { get; set; }
         [ForeignKey("AccountId")]

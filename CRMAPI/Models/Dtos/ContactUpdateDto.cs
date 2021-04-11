@@ -18,7 +18,7 @@ namespace CRMAPI.Models.Dtos
         [StringLength(30)]
         public string Phone { get; set; }
         [StringLength(100)]
-        public int PositionId { get; set; }
+        public string Position { get; set; }
         public int AccountId { get; set; }
         public string Description { get; set; }
     }
