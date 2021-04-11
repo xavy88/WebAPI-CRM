@@ -1,0 +1,90 @@
+﻿@model CRMWeb.Models.ViewModel.ContactVM
+@{
+    var title = "Create Contact";
+}
+<form method="post" asp-action="Upsert">
+
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Contact.Id != 0)
+        {
+            <input type="hidden" asp-for="Contact.Id">
+            title = "Edit Contact";
+        }
+
+        <div class="col-12 p-3">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Contact.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Contact.Name" class="form-control" />
+                    <span asp-validation-for="Contact.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Contact.Email"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Contact.Email" class="form-control" />
+                    <span asp-validation-for="Contact.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Contact.Phone"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Contact.Phone" class="form-control" />
+                    <span asp-validation-for="Contact.Phone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Contact.Position"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Contact.Position" class="form-control" />
+                    <span asp-validation-for="Contact.Position" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Account</label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Contact.AccountId,
+                   Model.AccountList, "- Please select a Account -", new { @class = "form-control" })
+                    <span asp-validation-for="Contact.AccountId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Contact.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Contact.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Contact.Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 offset-4">
+                    <button type="submit" class="btn btn-primary form-control">
+                        @(Model.Contact.Id!=0?"Update":"Create")
+                    </button>
+                </div>
+                <div class="col-4">
+                    <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}

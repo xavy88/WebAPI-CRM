@@ -13,6 +13,7 @@ namespace CRMWeb
         public static string AccountAPIPath = APIBaseUrl + "api/v1/users/";
         public static string EmployeeAPIPath = APIBaseUrl + "api/v1/employees/";
         public static string ClientAPIPath = APIBaseUrl + "api/v1/accounts/";
+        public static string ContactAPIPath = APIBaseUrl + "api/v1/contacts/";
 
     }
     

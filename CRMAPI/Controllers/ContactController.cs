@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CRMAPI.Controllers
 {
-    [Route("api/v{version:apiVersion}/employees")]
+    [Route("api/v{version:apiVersion}/contacts")]
     //[Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(GroupName = "CRMOpenAPISpecPositions")]
