@@ -75,5 +75,18 @@
             <param name="positionId">The Id of position</param>
             <returns></returns>
         </member>
+        <member name="M:CRMAPI.Controllers.ServiceController.GetService">
+            <summary>
+            Get a list of servicess.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CRMAPI.Controllers.ServiceController.GetService(System.Int32)">
+            <summary>
+            Get individual service.
+            </summary>
+            <param name="serviceId">The Id of service</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

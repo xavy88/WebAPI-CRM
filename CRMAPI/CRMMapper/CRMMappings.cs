@@ -23,6 +23,9 @@ namespace CRMAPI.CRMMapper
             CreateMap<Contact, ContactDto>().ReverseMap();
             CreateMap<Contact, ContactUpdateDto>().ReverseMap();
             CreateMap<Contact, ContactCreateDto>().ReverseMap();
+            CreateMap<Service, ServiceDto>().ReverseMap();
+            CreateMap<Service, ServiceUpdateDto>().ReverseMap();
+            CreateMap<Service, ServiceCreateDto>().ReverseMap();
         }
     }
 }
