@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task = CRMAPI.Models.Task;
 
 namespace CRMAPI.Data
 {
@@ -20,5 +21,6 @@ namespace CRMAPI.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<Task> Tasks { get; set; }
     }
 }
