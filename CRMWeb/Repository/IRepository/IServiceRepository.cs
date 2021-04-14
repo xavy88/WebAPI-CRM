@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CRMWeb.Repository.IRepository
 {
-    public interface IPositionRepository:IRepository<Position>
+    public interface IServiceRepository: IRepository<Service>
     {
     }
 }

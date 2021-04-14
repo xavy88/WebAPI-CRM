@@ -1,0 +1,69 @@
+﻿@model CRMWeb.Models.ViewModel.ServiceVM
+@{
+    var title = "Create Service";
+}
+<form method="post" asp-action="Upsert">
+
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Service.Id != 0)
+        {
+            <input type="hidden" asp-for="Service.Id">
+            title = "Edit Service";
+        }
+
+        <div class="col-12 p-3">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.Department.Name"></label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Service.DepartmentId,
+                   Model.DepartmentList, "-Please select a Department-", new { @class = "form-control" })
+                    <span asp-validation-for="Service.DepartmentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Service.Name" class="form-control" />
+                    <span asp-validation-for="Service.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Service.Price" class="form-control" />
+                    <span asp-validation-for="Service.Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Service.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Service.Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 offset-4">
+                    <button type="submit" class="btn btn-primary form-control">
+                        @(Model.Service.Id!=0?"Update":"Create")
+                    </button>
+                </div>
+                <div class="col-4">
+                    <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
