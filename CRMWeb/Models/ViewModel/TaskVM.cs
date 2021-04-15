@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CRMWeb.Models.ViewModel
 {
-    public class EmployeeVM
+    public class TaskVM
     {
         public IEnumerable<SelectListItem> DepartmentList { get; set; }
         public IEnumerable<SelectListItem> PositionList { get; set; }
-        public Employee Employee { get; set; }
+        public Task Task { get; set; }
     }
 }
