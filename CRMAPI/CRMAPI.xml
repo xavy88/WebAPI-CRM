@@ -88,5 +88,18 @@
             <param name="serviceId">The Id of service</param>
             <returns></returns>
         </member>
+        <member name="M:CRMAPI.Controllers.TaskController.GetTasks">
+            <summary>
+            Get a list of tasks.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CRMAPI.Controllers.TaskController.GetTask(System.Int32)">
+            <summary>
+            Get individual task.
+            </summary>
+            <param name="taskId">The Id of task</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
