@@ -22,5 +22,8 @@ namespace CRMAPI.Data
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<TaskAssignment> TaskAssignments { get; set; }
+
+        
     }
 }
