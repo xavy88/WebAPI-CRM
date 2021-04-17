@@ -29,6 +29,8 @@ namespace CRMAPI.CRMMapper
             CreateMap<Models.Task, TaskCreateDto>().ReverseMap();
             CreateMap<Models.Task, TaskDto>().ReverseMap();
             CreateMap<Models.Task, TaskUpdateDto>().ReverseMap();
+            CreateMap<TaskAssignment, TaskAssignmentDto>().ReverseMap();
+            CreateMap<TaskAssignment, TaskAssignmentUpsertDto>().ReverseMap();
         }
     }
 }

@@ -88,6 +88,19 @@
             <param name="serviceId">The Id of service</param>
             <returns></returns>
         </member>
+        <member name="M:CRMAPI.Controllers.TaskAssignmentController.GetTaskAssignments">
+            <summary>
+            Get a list of positions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CRMAPI.Controllers.TaskAssignmentController.GetTaskAssignment(System.Int32)">
+            <summary>
+            Get individual position.
+            </summary>
+            <param name="taskAssignmentId">The Id of Task Assignment</param>
+            <returns></returns>
+        </member>
         <member name="M:CRMAPI.Controllers.TaskController.GetTasks">
             <summary>
             Get a list of tasks.

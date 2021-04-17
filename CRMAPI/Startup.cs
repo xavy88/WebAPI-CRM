@@ -51,6 +51,7 @@ namespace CRMAPI
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITaskAssignmentRepository, TaskAssignmentRepository>();
             services.AddAutoMapper(typeof(CRMMappings));
             services.AddApiVersioning(options =>
             {
