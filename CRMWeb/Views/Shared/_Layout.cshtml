@@ -51,9 +51,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-controller="Task" asp-action="Index">Task</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="TaskAssignment" asp-action="Index">Assignment</a>
+                            </li>
                         }
                         @if (httpAcc.HttpContext.Session.GetString("JWToken") != null
-                && httpAcc.HttpContext.Session.GetString("JWToken").ToString().Length > 0)
+               && httpAcc.HttpContext.Session.GetString("JWToken").ToString().Length > 0)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-controller="Home" asp-action="Logout">Logout</a>
