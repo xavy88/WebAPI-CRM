@@ -21,7 +21,7 @@ namespace CRMWeb.Models
         [Display(Name = "Task")]
         public int TaskId { get; set; }
         [ForeignKey("TaskId")]
-        public virtual Task Task { get; set; }
+        public virtual Models.Task Task { get; set; }
         [Display(Name = "Assignee")]
         public int UserId { get; set; }
         [ForeignKey("UserId")]

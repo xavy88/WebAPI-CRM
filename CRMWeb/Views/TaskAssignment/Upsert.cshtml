@@ -15,54 +15,35 @@
         <div class="col-12 p-3">
             <h2 class="text-primary">@title</h2>
         </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label>Account</label>
-            </div>
-            <div class="col-8">
-                @Html.DropDownListFor(m => m.TaskAssignment.AccountId,
-               Model.AccountList, "-Please select an Account-", new { @class = "form-control" })
-                <span asp-validation-for="TaskAssignment.AccountId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label>Task</label>
-            </div>
-            <div class="col-8">
-                @Html.DropDownListFor(m => m.TaskAssignment.TaskId,
-               Model.TaskList, "-Please select a Task-", new { @class = "form-control" })
-                <span asp-validation-for="TaskAssignment.TaskId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label>User</label>
-            </div>
-            <div class="col-8">
-                @Html.DropDownListFor(m => m.TaskAssignment.UserId,
-               Model.UserList, "-Please select an User-", new { @class = "form-control" })
-                <span asp-validation-for="TaskAssignment.UserId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                <label>Department</label>
-            </div>
-            <div class="col-8">
-                @Html.DropDownListFor(m => m.TaskAssignment.DepartmentId,
-               Model.DepartmentList, "-Please select a Department-", new { @class = "form-control" })
-                <span asp-validation-for="TaskAssignment.DepartmentId" class="text-danger"></span>
-            </div>
-        </div>
         <div class="col-8">
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="TaskAssignment.DueDate"></label>
+                    <label>Account</label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="TaskAssignment.DueDate" class="form-control" />
-                    <span asp-validation-for="TaskAssignment.DueDate" class="text-danger"></span>
+                    @Html.DropDownListFor(m => m.TaskAssignment.AccountId,
+                   Model.AccountList, "-Please select an Account-", new { @class = "form-control" })
+                    <span asp-validation-for="TaskAssignment.AccountId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Task</label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.TaskAssignment.TaskId,
+                   Model.TaskList, "-Please select a Task-", new { @class = "form-control" })
+                    <span asp-validation-for="TaskAssignment.TaskId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Department</label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.TaskAssignment.DepartmentId,
+                   Model.DepartmentList, "-Please select a Department-", new { @class = "form-control" })
+                    <span asp-validation-for="TaskAssignment.DepartmentId" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
@@ -89,6 +70,7 @@
                     <span asp-validation-for="TaskAssignment.Notes" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="form-group row">
                 <div class="col-4 offset-4">
                     <button type="submit" class="btn btn-primary form-control">
@@ -100,6 +82,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 </form>

@@ -57,7 +57,7 @@ namespace CRMWeb.Controllers
                 UserList = userList.Select(i => new SelectListItem
                 {
                     Text = i.UserName,
-                    Value = i.UserName.ToString()
+                    Value = i.Token.ToString()
                 }),
 
                 AccountList = accountList.Select(i => new SelectListItem
