@@ -14,15 +14,15 @@ namespace CRMWeb.Controllers
 {
     public class TaskAssignmentController : Controller
     {
-        private readonly IAccountRepository _userRepository;
+        private readonly IEmployeeRepository _empRepository;
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IClientRepository _accountRepository;
         private readonly ITaskRepository _taskRepository;
         private readonly ITaskAssignmentRepository _taRepository;
 
-        public TaskAssignmentController(IAccountRepository userRepository,IDepartmentRepository departmentRepository,IClientRepository accountRepository, ITaskRepository taskRepository, ITaskAssignmentRepository taRepository)
+        public TaskAssignmentController(IEmployeeRepository empRepository,IDepartmentRepository departmentRepository,IClientRepository accountRepository, ITaskRepository taskRepository, ITaskAssignmentRepository taRepository)
         {
-            _userRepository = userRepository;
+            _empRepository = empRepository;
             _departmentRepository = departmentRepository;
             _accountRepository = accountRepository;
             _taskRepository = taskRepository;
@@ -37,7 +37,7 @@ namespace CRMWeb.Controllers
         {
             IEnumerable<Department> dptList = await _departmentRepository.GetAllAsync(SD.DepartmentAPIPath, HttpContext.Session.GetString("JWToken"));
             IEnumerable<Models.Task> taskList = await _taskRepository.GetAllAsync(SD.TaskAPIPath, HttpContext.Session.GetString("JWToken"));
-            IEnumerable<User> userList = await _userRepository.GetAllAsync(SD.AccountAPIPath, HttpContext.Session.GetString("JWToken"));
+            IEnumerable<Employee> empList = await _empRepository.GetAllAsync(SD.EmployeeAPIPath, HttpContext.Session.GetString("JWToken"));
             IEnumerable<Account> accountList = await _accountRepository.GetAllAsync(SD.ClientAPIPath, HttpContext.Session.GetString("JWToken"));
             TaskAssignmentVM objVM = new TaskAssignmentVM()
             {
@@ -54,10 +54,10 @@ namespace CRMWeb.Controllers
                     Value = i.Id.ToString()
                 }),
 
-                UserList = userList.Select(i => new SelectListItem
+                EmployeeList = empList.Select(i => new SelectListItem
                 {
-                    Text = i.UserName,
-                    Value = i.Token.ToString()
+                    Text = i.Name,
+                    Value = i.Id.ToString()
                 }),
 
                 AccountList = accountList.Select(i => new SelectListItem
@@ -106,7 +106,7 @@ namespace CRMWeb.Controllers
             else
             {
                 IEnumerable<Department> dptList = await _departmentRepository.GetAllAsync(SD.DepartmentAPIPath, HttpContext.Session.GetString("JWToken"));
-                IEnumerable<User> userList = await _userRepository.GetAllAsync(SD.AccountAPIPath, HttpContext.Session.GetString("JWToken"));
+                IEnumerable<Employee> empList = await _empRepository.GetAllAsync(SD.EmployeeAPIPath, HttpContext.Session.GetString("JWToken"));
                 IEnumerable<Account> accountList = await _accountRepository.GetAllAsync(SD.ClientAPIPath, HttpContext.Session.GetString("JWToken"));
                 IEnumerable<Models.Task> tasktList = await _taskRepository.GetAllAsync(SD.TaskAPIPath, HttpContext.Session.GetString("JWToken"));
                 TaskAssignmentVM objVM = new TaskAssignmentVM()
@@ -118,10 +118,10 @@ namespace CRMWeb.Controllers
                         Value = i.Id.ToString()
                     }),
 
-                    UserList = userList.Select(i => new SelectListItem
+                    EmployeeList = empList.Select(i => new SelectListItem
                     {
-                        Text = i.UserName,
-                        Value = i.UserName.ToString()
+                        Text = i.Name,
+                        Value = i.Id.ToString()
                     }),
 
                     TaskAssignment = new TaskAssignment()

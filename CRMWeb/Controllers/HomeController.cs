@@ -62,19 +62,26 @@ namespace CRMWeb.Controllers
         public async Task<IActionResult> Login(User obj)
         {
             User objUser = await _accRepo.LoginAsync(SD.AccountAPIPath+"authenticate/", obj);
-            if (objUser== null)
+            if (ModelState.IsValid)
             {
-                return View();
-            }
+                if (objUser == null)
+                {
+                    return View();
+                }
 
-            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            identity.AddClaim(new Claim(ClaimTypes.Name, objUser.UserName));
-            identity.AddClaim(new Claim(ClaimTypes.Role, objUser.Role));
-            var principal = new ClaimsPrincipal(identity);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-            HttpContext.Session.SetString("JWToken", objUser.Token);
-            TempData["alert"] = "Welcome " + objUser.UserName;
-            return RedirectToAction("Index");
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, objUser.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Role, objUser.Role));
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                HttpContext.Session.SetString("JWToken", objUser.Token);
+                TempData["alert"] = "Welcome " + objUser.UserName;
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(obj);
+            }
         }
 
         [HttpGet]

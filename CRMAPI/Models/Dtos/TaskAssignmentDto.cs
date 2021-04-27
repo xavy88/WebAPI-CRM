@@ -19,9 +19,9 @@ namespace CRMAPI.Models.Dtos
         [ForeignKey("TaskId")]
         public virtual Task Task { get; set; }
         [Display(Name = "Assignee")]
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public virtual Employee Employee { get; set; }
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]

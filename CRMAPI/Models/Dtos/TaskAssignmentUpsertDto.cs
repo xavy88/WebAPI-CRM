@@ -15,7 +15,7 @@ namespace CRMAPI.Models.Dtos
         [Display(Name = "Task")]
         public int TaskId { get; set; }
         [Display(Name = "Assignee")]
-        public int UserId { get; set; }
+        public int EmployeeId { get; set; }
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         [DataType(DataType.Date)]

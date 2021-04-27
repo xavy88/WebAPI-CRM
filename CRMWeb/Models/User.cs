@@ -9,7 +9,9 @@ namespace CRMWeb.Models
 {
     public class User
     {
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
         public string Role { get; set; }
         public byte[] Picture { get; set; }

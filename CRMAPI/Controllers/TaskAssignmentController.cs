@@ -106,11 +106,6 @@ namespace CRMAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            //if (_taRepo.TaskAssignmentExists(taskAssignmentDto.AccountId))
-            //{
-            //    ModelState.AddModelError("", "Employee already exists!");
-            //    return StatusCode(404, ModelState);
-            //}
 
             var taskAssignmentObj = _mapper.Map<TaskAssignment>(taskAssignmentDto);
 

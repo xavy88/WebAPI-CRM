@@ -12,11 +12,11 @@ function loadDataTable() {
             "datatype": "json"
         },
         "columns": [           
-            { "data": "account.name", "width": "15%" },
-            { "data": "user.userName", "width": "15%" },
+            { "data": "account.name", "width": "20%" },
             { "data": "task.name", "width": "15%" },
-            { "data": "department.name", "width": "15%" },
-            { "data": "dueDate", "width": "10%" },
+            { "data": "employee.name", "width": "15%" },
+            { "data": "department.name", "width": "8%" },
+            {"data": "dueDate", "width": "10%", "type": 'datetime',"moment(data).format":"('MMMM Do YYYY')"},
             {
                 "data": "id",
                 "render": function (data) {

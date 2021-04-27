@@ -36,12 +36,6 @@ namespace CRMAPI.Repository
             return Save();
         }
 
-        //public bool TaskAssignmentExists(string name)
-        //{
-        //    bool value = _db.TaskAssignments.Any(a => a.Name.ToLower().Trim() == name.ToLower().Trim());
-        //    return value;
-        //}
-
         public bool TaskAssignmentExists(int id)
         {
             return _db.TaskAssignments.Any(a => a.Id == id);
@@ -49,12 +43,12 @@ namespace CRMAPI.Repository
 
         public TaskAssignment GetTaskAssignment(int taskAssignmentId)
         {
-            return _db.TaskAssignments.Include(c => c.Department).Include(d => d.Account).Include(u => u.User).Include(t => t.Task).FirstOrDefault(a => a.Id == taskAssignmentId);
+            return _db.TaskAssignments.Include(c => c.Department).Include(d => d.Account).Include(u => u.Employee).Include(t => t.Task).FirstOrDefault(a => a.Id == taskAssignmentId);
         }
 
         public ICollection<TaskAssignment> GetTaskAssignments()
         {
-            return _db.TaskAssignments.Include(c => c.Department).Include(d => d.Account).Include(u => u.User).Include(t => t.Task).OrderBy(a => a.DueDate).ToList();
+            return _db.TaskAssignments.Include(c => c.Department).Include(d => d.Account).Include(u => u.Employee).Include(t => t.Task).OrderBy(a => a.DueDate).ToList();
         }
 
         public bool InactiveTaskAssignment(TaskAssignment taskAssignment)
@@ -76,8 +70,8 @@ namespace CRMAPI.Repository
 
         public ICollection<TaskAssignment> GetTaskAssignmentInUser(int userId)
         {
-            return _db.TaskAssignments.Include(c => c.User)
-                .Where(c => c.UserId == userId).ToList();
+            return _db.TaskAssignments.Include(c => c.Employee)
+                .Where(c => c.Id == userId).ToList();
 
         }
     }

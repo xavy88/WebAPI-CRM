@@ -11,7 +11,7 @@ namespace CRMWeb.Models.ViewModel
         public IEnumerable<SelectListItem> DepartmentList { get; set; }
         public IEnumerable<SelectListItem> AccountList { get; set; }
         public IEnumerable<SelectListItem> TaskList { get; set; }
-        public IEnumerable<SelectListItem> UserList { get; set; }
+        public IEnumerable<SelectListItem> EmployeeList { get; set; }
         public TaskAssignment TaskAssignment { get; set; }
     }
 }
