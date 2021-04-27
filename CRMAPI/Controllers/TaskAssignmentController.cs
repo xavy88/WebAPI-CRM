@@ -29,7 +29,7 @@ namespace CRMAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of positions.
+        /// Get a list of assignment.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -48,7 +48,7 @@ namespace CRMAPI.Controllers
         }
 
         /// <summary>
-        /// Get individual position.
+        /// Get individual assignment.
         /// </summary>
         /// <param name="taskAssignmentId">The Id of Task Assignment</param>
         /// <returns></returns>

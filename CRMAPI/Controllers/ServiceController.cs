@@ -29,7 +29,7 @@ namespace CRMAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of servicess.
+        /// Get a list of services.
         /// </summary>
         /// <returns></returns>
         [HttpGet]

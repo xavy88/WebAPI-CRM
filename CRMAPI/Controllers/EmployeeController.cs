@@ -29,7 +29,7 @@ namespace CRMAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of positions.
+        /// Get a list of employees.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -50,7 +50,7 @@ namespace CRMAPI.Controllers
         /// <summary>
         /// Get individual position.
         /// </summary>
-        /// <param name="employeeId">The Id of position</param>
+        /// <param name="employeeId">The Id of employee</param>
         /// <returns></returns>
 
         [HttpGet("{employeeId:int}", Name ="GetEmployee")]

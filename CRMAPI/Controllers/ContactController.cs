@@ -29,7 +29,7 @@ namespace CRMAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of positions.
+        /// Get a list of contacts.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -48,7 +48,7 @@ namespace CRMAPI.Controllers
         }
 
         /// <summary>
-        /// Get individual position.
+        /// Get individual contact.
         /// </summary>
         /// <param name="contactId">The Id of Contact</param>
         /// <returns></returns>

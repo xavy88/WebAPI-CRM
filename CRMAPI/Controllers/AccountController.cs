@@ -48,7 +48,7 @@ namespace CRMAPI.Controllers
         }
 
         /// <summary>
-        /// Get individual department.
+        /// Get individual account.
         /// </summary>
         /// <param name="accountId">The Id of account</param>
         /// <returns></returns>
